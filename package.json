@@ -1,17 +1,25 @@
 {
-  "name": "clean-node-api-typescript",
+  "name": "typescript-api-template",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
-    "test": "jest",
-    "test:staged": "jest"
+    "dev": "sucrase-node src/main/server.ts",
+    "start": "sucrase-node src/main/server.ts",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",
+    "test": "jest --passWithNoTests --silent --coverage=false --noStackTrace --runInBand --no-cache",
+    "test:unit": "yarn test --watch -c jest-unit-config.ts",
+    "test:integration": "yarn test --watch -c jest-integration-config.ts",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test:verbose --coverage=true",
+    "prepare": "husky install"
   },
   "keywords": [],
-  "author": "",
+  "author": "Thiago Adomaitis",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^27.0.1",
     "@types/node": "^16.4.13",
     "@typescript-eslint/eslint-plugin": "^4.29.0",
     "eslint": "^7.32.0",
@@ -23,7 +31,8 @@
     "husky": "^7.0.1",
     "jest": "^27.0.6",
     "lint-staged": "^11.1.2",
-    "ts-jest": "^27.0.4",
+    "ts-jest": "^27.0.5",
+    "ts-node": "^10.2.1",
     "typescript": "^4.3.5"
   }
 }
